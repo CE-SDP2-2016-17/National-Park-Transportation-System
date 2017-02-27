@@ -5,20 +5,17 @@
  */
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author dell pc
  */
-public class signup extends HttpServlet
+public class addroute extends HttpServlet
 {
 
     /**
@@ -33,60 +30,20 @@ public class signup extends HttpServlet
             throws ServletException, IOException
     {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String DB_Driver = getServletContext().getInitParameter("DB_Driver");
-        String DB_Con = getServletContext().getInitParameter("DB_Con");
-        String DB_Uname = getServletContext().getInitParameter("DB_Username");
-        String DB_Password = getServletContext().getInitParameter("DB_Password");
-        String Name = request.getParameter("Name");
-        String Email = request.getParameter("Email");
-        String Username = request.getParameter("Username");
-        String Password = request.getParameter("Password1");
+        //PrintWriter out = response.getWriter();
 
-        Connection con = null;
-        try
-        {
+        HttpSession session = request.getSession();
 
-            Class.forName(DB_Driver);
-            con = DriverManager.getConnection(DB_Con, DB_Uname, DB_Password);
-            PreparedStatement pstm;
-            //The query can be update query or can be select query
-            String query = "insert into customer(Name,Email,Username,Password) values(?,?,?,?)";
-            pstm = con.prepareStatement(query);
-            pstm.setString(1, Name);
-            pstm.setString(2, Email);
-            pstm.setString(3, Username);
-            pstm.setString(4, Password);
+        String routeName = request.getParameter("routeName");
+        String srcstation = request.getParameter("src_station");
+        int no_stations = Integer.parseInt(request.getParameter("no_stations"));
 
-            int count = pstm.executeUpdate();
-            String s1 = "signin.jsp";
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<body>");
-            out.println("Registration successful<br/><br/>");
-            out.println("<a href=" + s1 + ">Login</a>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-        catch (Exception ex)
-        {
-            out.println(ex);
-        }
-        finally
-        {
-            try
-            {
-                if (con != null)
-                {
-                    con.close();
-                }
-            }
-            catch (Exception ex)
-            {
-                out.println(ex);
-            }
-            out.close();
-        }
+        session.setAttribute("route_name", routeName);
+        session.setAttribute("src_station", srcstation);
+        session.setAttribute("no_station", no_stations);
+
+        response.sendRedirect("/NationalPark/addroute_db.jsp");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

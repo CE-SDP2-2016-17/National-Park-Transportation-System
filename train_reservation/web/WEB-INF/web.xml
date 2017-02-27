@@ -12,6 +12,22 @@
         <servlet-name>addstation</servlet-name>
         <servlet-class>addstation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>abc</servlet-name>
+        <servlet-class>abc</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addroute</servlet-name>
+        <servlet-class>addroute</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>dummy</servlet-name>
+        <servlet-class>dummy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addroute_db</servlet-name>
+        <servlet-class>addroute_db</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -23,6 +39,22 @@
     <servlet-mapping>
         <servlet-name>addstation</servlet-name>
         <url-pattern>/addstation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>abc</servlet-name>
+        <url-pattern>/abc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addroute</servlet-name>
+        <url-pattern>/addroute</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dummy</servlet-name>
+        <url-pattern>/dummy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addroute_db</servlet-name>
+        <url-pattern>/addroute_db</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

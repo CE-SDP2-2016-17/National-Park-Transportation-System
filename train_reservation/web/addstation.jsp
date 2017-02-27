@@ -14,7 +14,7 @@
     <body>
         <form id="form1" action="addstation" method="post">
             <div id="d">
-                <h1 style="color:red;margin-left:30%" > Add Station</h1>
+                <h1 style="color:red;margin-left:25%" > Add Station</h1>
                 <table>
                     <tr>
                         <td>Name:</td>
@@ -22,11 +22,12 @@
                     </tr>
                     <tr>
                         <td>Description:</td>
-                        <td><textarea name="description" rows="5"  maxlength="200" cols="22"placeholder="Station Description here"></textarea></td>
+                        <td><textarea name="Description" rows="5"  maxlength="200" cols="22"placeholder="Station Description here"></textarea></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" name="Submit" value="Submit"></td>
+                        <td><input type="Submit" name="Submit" value="Submit"></td>
                     </tr>
+                    <tr><td><label id="label1" hidden="true">label1</label></td></tr>
                 </table>
             </div>
         </form>

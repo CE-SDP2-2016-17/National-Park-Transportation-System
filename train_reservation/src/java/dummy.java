@@ -6,9 +6,6 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dell pc
  */
-public class signup extends HttpServlet
+public class dummy extends HttpServlet
 {
 
     /**
@@ -34,57 +31,21 @@ public class signup extends HttpServlet
     {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String DB_Driver = getServletContext().getInitParameter("DB_Driver");
-        String DB_Con = getServletContext().getInitParameter("DB_Con");
-        String DB_Uname = getServletContext().getInitParameter("DB_Username");
-        String DB_Password = getServletContext().getInitParameter("DB_Password");
-        String Name = request.getParameter("Name");
-        String Email = request.getParameter("Email");
-        String Username = request.getParameter("Username");
-        String Password = request.getParameter("Password1");
-
-        Connection con = null;
         try
         {
-
-            Class.forName(DB_Driver);
-            con = DriverManager.getConnection(DB_Con, DB_Uname, DB_Password);
-            PreparedStatement pstm;
-            //The query can be update query or can be select query
-            String query = "insert into customer(Name,Email,Username,Password) values(?,?,?,?)";
-            pstm = con.prepareStatement(query);
-            pstm.setString(1, Name);
-            pstm.setString(2, Email);
-            pstm.setString(3, Username);
-            pstm.setString(4, Password);
-
-            int count = pstm.executeUpdate();
-            String s1 = "signin.jsp";
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet dummy</title>");
+            out.println("</head>");
             out.println("<body>");
-            out.println("Registration successful<br/><br/>");
-            out.println("<a href=" + s1 + ">Login</a>");
+            out.println("<h1>Servlet dummy at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-        catch (Exception ex)
-        {
-            out.println(ex);
-        }
         finally
         {
-            try
-            {
-                if (con != null)
-                {
-                    con.close();
-                }
-            }
-            catch (Exception ex)
-            {
-                out.println(ex);
-            }
             out.close();
         }
     }

@@ -14,7 +14,7 @@
     <body>
         <form id="form1" action="signup" method="post">
             <div id="d">
-                <h1 style="color:red;margin-left:30%" > User Login</h1>
+                <h1 style="color:red;margin-left:30%" > User Sign Up</h1>
                 <table>
                     <tr>
                         <td>Name:</td>
