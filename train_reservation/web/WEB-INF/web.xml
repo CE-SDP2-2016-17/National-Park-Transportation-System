@@ -28,6 +28,18 @@
         <servlet-name>addroute_db</servlet-name>
         <servlet-class>addroute_db</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>select_route</servlet-name>
+        <servlet-class>select_route</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>select_stops</servlet-name>
+        <servlet-class>select_stops</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addtrain_db</servlet-name>
+        <servlet-class>addtrain_db</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>addroute_db</servlet-name>
         <url-pattern>/addroute_db</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>select_route</servlet-name>
+        <url-pattern>/select_route</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>select_stops</servlet-name>
+        <url-pattern>/select_stops</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addtrain_db</servlet-name>
+        <url-pattern>/addtrain_db</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
