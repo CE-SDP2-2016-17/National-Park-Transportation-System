@@ -42,7 +42,7 @@ public class addroute extends HttpServlet
         session.setAttribute("src_station", srcstation);
         session.setAttribute("no_station", no_stations);
 
-        response.sendRedirect("/NationalPark/addroute_db.jsp");
+        response.sendRedirect(request.getContextPath() + "/addroute_db.jsp");
 
     }
 

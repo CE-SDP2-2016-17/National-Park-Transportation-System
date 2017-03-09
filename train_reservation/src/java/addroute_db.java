@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +50,33 @@ public class addroute_db extends HttpServlet
         String DB_Password = getServletContext().getInitParameter("DB_Password");
         String route_name = session.getAttribute("route_name").toString();
         String src_station = session.getAttribute("src_station").toString();
-        String no_station = session.getAttribute("no_station").toString();
+        int no_station = Integer.parseInt(session.getAttribute("no_station").toString());
+
+        int max_km = 0;
+
+        ArrayList<String> stationArrayList = new ArrayList<String>();
+        ArrayList<Integer> kmArrayList = new ArrayList<Integer>();
+        stationArrayList.add(new String(src_station));
+        kmArrayList.add(0);
+
+        Integer i;
+        for (i = 1; i <= (no_station - 1); i++)
+        {
+            String station = request.getParameter("station_" + i.toString());
+            int kms = Integer.parseInt(request.getParameter("km_" + i.toString()));
+
+            if (stationArrayList.contains(station) || kms <= max_km)
+            {
+                session.setAttribute("error", "Error: station name repeated !!!");
+                response.sendRedirect(request.getContextPath() + "/addroute_db.jsp");
+            }
+            else
+            {
+                stationArrayList.add(station);
+                kmArrayList.add(kms);
+                max_km = kms;
+            }
+        }
 
         Connection connection = null;
 
@@ -56,14 +84,82 @@ public class addroute_db extends HttpServlet
         {
             Class.forName(DB_Driver);
             connection = DriverManager.getConnection(DB_Con, DB_Uname, DB_Password);
-            PreparedStatement preparedStatement = null;
+            PreparedStatement preparedStatement;
+            connection.setAutoCommit(false);
 
             String query = "insert into route(route_name,stations,kilometers) values(?,?,?)";
-            preparedStatement.setString(1, route_name);
+            preparedStatement = connection.prepareStatement(query);
+            for (i = 0; i < stationArrayList.size(); i++)
+            {
+                preparedStatement.setString(1, route_name);
+                preparedStatement.setString(2, stationArrayList.get(i));
+                preparedStatement.setInt(3, kmArrayList.get(i));
+                preparedStatement.addBatch();
+            }
 
+            int count[] = preparedStatement.executeBatch();
+            connection.commit();
+
+            out.println("<!DOCTYPE html>");
+            out.println("<jsp:include page=\"style.jsp\"/>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Train Reservation</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<div id=\"d\">");
+            out.println("<table>");
+
+            for (i = 0; i < count.length; i++)
+            {
+                out.print("<tr>");
+                out.print("<td>");
+                out.println("Query " + i + " has effected " + count[i] + " rows");
+                out.print("</td>");
+                out.print("</tr>");
+            }
+
+            out.println("</table>");
+            out.println("</div>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        catch (Exception e)
+        catch (ClassNotFoundException e)
         {
+            try
+            {
+                connection.rollback();
+            }
+            catch (SQLException ex)
+            {
+                out.println(ex);
+            }
+            out.println(e);
+        }
+        catch (SQLException e)
+        {
+            try
+            {
+                connection.rollback();
+            }
+            catch (SQLException ex)
+            {
+                out.println(ex);
+            }
+            out.println(e);
+        }
+        finally
+        {
+            out.close();
+            try
+            {
+                connection.close();
+            }
+            catch (SQLException ex)
+            {
+                out.println(ex);
+            }
+
         }
 
     }

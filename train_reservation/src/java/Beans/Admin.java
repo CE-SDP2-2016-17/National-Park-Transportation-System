@@ -69,6 +69,55 @@ public class Admin
 
     }
 
+    public ArrayList<String> getRoutes()
+    {/*
+         String DB_Driver = getServletContext().getInitParameter("DB_Driver");
+         String DB_Con = getServletContext().getInitParameter("DB_Con");
+         String DB_Uname = getServletContext().getInitParameter("DB_Username");
+         String DB_Password = getServletContext().getInitParameter("DB_Password");
+         */
+
+        Connection con = null;
+        ResultSet resultSet;
+        ArrayList<String> arrayListName = new ArrayList<String>();
+        try
+        {
+            Class.forName(getDriver());
+            con = DriverManager.getConnection(getConnnectionString(), getUserName(), getPassword());
+            PreparedStatement preparedStatement;
+            //The query can be update query or can be select query
+            String query = "select distinct route_name from route";
+            preparedStatement = con.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next())
+            {
+                arrayListName.add(resultSet.getString(1));
+            }
+
+        }
+        catch (Exception e)
+        {
+
+        }
+        finally
+        {
+            try
+            {
+                if (con != null)
+                {
+                    con.close();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        return arrayListName;
+
+    }
+
     public static String getDriver()
     {
         return "com.mysql.jdbc.Driver";

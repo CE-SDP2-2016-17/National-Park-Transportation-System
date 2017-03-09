@@ -17,7 +17,7 @@
                 <table>
                     <tr><a href="addstation.jsp">Add New Station</a></tr><br/><br/>
                     <tr><a href="addroute.jsp">Add New Route</a></tr><br/><br/>
-                    <tr><a href="addtrain.jsp">Add New Train</a></tr><br/><br/>
+                    <tr><a href="select_route.jsp">Add New Train</a></tr><br/><br/>
                 </table>
             </div>
     </body>
