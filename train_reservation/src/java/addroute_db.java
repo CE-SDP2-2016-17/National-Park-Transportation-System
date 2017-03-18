@@ -37,11 +37,8 @@ public class addroute_db extends HttpServlet
     {
         response.setContentType("text/html;charset=UTF-8");
 
-        HttpSession session = request.getSession(false);
-        if (session == null)
-        {
-            response.sendRedirect("/NationalPark/index.jsp");
-        }
+        HttpSession session = request.getSession();
+
         PrintWriter out = response.getWriter();
 
         String DB_Driver = getServletContext().getInitParameter("DB_Driver");

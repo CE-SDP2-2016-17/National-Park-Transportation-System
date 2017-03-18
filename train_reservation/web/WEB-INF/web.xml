@@ -40,6 +40,18 @@
         <servlet-name>addtrain_db</servlet-name>
         <servlet-class>addtrain_db</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>available</servlet-name>
+        <servlet-class>available</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>booktickets</servlet-name>
+        <servlet-class>booktickets</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>available_db</servlet-name>
+        <servlet-class>available_db</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -79,6 +91,18 @@
     <servlet-mapping>
         <servlet-name>addtrain_db</servlet-name>
         <url-pattern>/addtrain_db</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>available</servlet-name>
+        <url-pattern>/available</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>booktickets</servlet-name>
+        <url-pattern>/booktickets</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>available_db</servlet-name>
+        <url-pattern>/available_db</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

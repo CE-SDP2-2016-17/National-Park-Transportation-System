@@ -15,10 +15,12 @@ import java.util.ArrayList;
  *
  * @author dell pc
  */
-public class Admin
+public
+        class Admin
 {
 
-    public ArrayList<String> getStations()
+    public
+            ArrayList<String> getStations()
     {/*
          String DB_Driver = getServletContext().getInitParameter("DB_Driver");
          String DB_Con = getServletContext().getInitParameter("DB_Con");
@@ -28,8 +30,8 @@ public class Admin
 
         Connection con = null;
         ResultSet resultSet;
-        ArrayList<String> arrayListId = new ArrayList<String>();
-        ArrayList<String> arrayListName = new ArrayList<String>();
+        ArrayList<String> arrayListId = new ArrayList<>();
+        ArrayList<String> arrayListName = new ArrayList<>();
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
@@ -69,7 +71,8 @@ public class Admin
 
     }
 
-    public ArrayList<String> getRoutes()
+    public
+            ArrayList<String> getRoutes()
     {/*
          String DB_Driver = getServletContext().getInitParameter("DB_Driver");
          String DB_Con = getServletContext().getInitParameter("DB_Con");
@@ -118,22 +121,26 @@ public class Admin
 
     }
 
-    public static String getDriver()
+    public static
+            String getDriver()
     {
         return "com.mysql.jdbc.Driver";
     }
 
-    public static String getConnnectionString()
+    public static
+            String getConnnectionString()
     {
         return "jdbc:mysql://localhost/trainreservation";
     }
 
-    public static String getUserName()
+    public static
+            String getUserName()
     {
         return "root";
     }
 
-    public static String getPassword()
+    public static
+            String getPassword()
     {
         return "";
     }

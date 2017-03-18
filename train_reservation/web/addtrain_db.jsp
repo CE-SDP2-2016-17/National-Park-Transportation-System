@@ -6,25 +6,24 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
-<style>
-    #d{
-                background-color: #dddddd;
-		width:600px;
-		padding:10px;	
-		margin-top: 5px;
-                margin-left:25%;
-                font-family:'comic sans ms';
-            }
-            #b1:hover{
-            background-color: #224466;
-            }
-</style>
+
 <html>
     <head>
         <jsp:include page="commonheader.jsp"/>
     </head>
     <body>
+        <style>
+            #d{
+                        background-color: #dddddd;
+                        width:600px;
+                        padding:10px;	
+                        margin-top: 5px;
+                        margin-left:25%;
+                        font-family:'comic sans ms';
+               }
+        </style>
         <div id="d">
             <h1 style="color:red;margin-left:30%" > Add New Train</h1>
             <form id="form1" action="addtrain_db" method="post">
@@ -50,15 +49,15 @@
                 </tr>
                 <tr>
                     <td>Seats in First class:</td>
-                    <td><input type="text" name="seats_fc"/></td>
+                    <td><input type="text" name="seats_fc" style="width:130px"/></td>
                 </tr>
                 <tr>
                     <td>Seats in Second class:</td>
-                    <td><input type="text" name="seats_sc"/></td>
+                    <td><input type="text" name="seats_sc" style="width:130px"/></td>
                 </tr>
                 <tr>
                     <td>Seats in Third class:</td>
-                    <td><input type="text" name="seats_tc"/></td>
+                    <td><input type="text" name="seats_tc" style="width:130px"/></td>
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
