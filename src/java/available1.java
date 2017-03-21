@@ -35,6 +35,7 @@ public class available1 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            
             HttpSession session=request.getSession();
            // String train_no=null;
             //train_no=(String) session.getAttribute(train_no);
