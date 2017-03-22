@@ -5,6 +5,8 @@
  */
 package Beans;
 
+import java.util.Date;
+
 /**
  *
  * @author dell pc
@@ -23,6 +25,14 @@ public class Avail_Trains
         this.name = name;
         this.arrival_time = arrival_time;
         this.dept_time = dept_time;
+    }
+
+    public Avail_Trains(int train_no, String name, String arrival_time, String dept_time, Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Avail_Trains(int train_no, String name, String arrival_time, String dept_time, String j_date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getName()

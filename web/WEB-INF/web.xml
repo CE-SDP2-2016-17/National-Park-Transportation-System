@@ -42,19 +42,33 @@
     </servlet>
     <servlet>
         <servlet-name>available</servlet-name>
-        <servlet-class>available</servlet-class>
+        <servlet-class>available1</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>booktickets</servlet-name>
         <servlet-class>booktickets</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>seatavailable</servlet-name>
+        <servlet-class>seatavailable</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>available_db</servlet-name>
         <servlet-class>available_db</servlet-class>
     </servlet>
+        <servlet-name>realbooking</servlet-name>
+        <servlet-class>realbooking</servlet-class>
+    <servlet-mapping>
+        <servlet-name>realbooking</servlet-name>
+        <url-pattern>/realbooking</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>seatavailable</servlet-name>
+        <url-pattern>/seatavailable</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>signin</servlet-name>

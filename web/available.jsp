@@ -53,7 +53,7 @@
                             <td>${trains.arrival_time} &nbsp;&nbsp;</td>
                             <td>${sessionScope.dest_station} &nbsp;&nbsp;</td>
                             <td>${trains.dept_time} &nbsp;&nbsp;</td>
-                            
+<%--                            <td>${trains.j_date} &nbsp;&nbsp;</td>--%>
                         </tr>
                     </c:forEach>
                 </table>
@@ -73,9 +73,9 @@
                         <td>Class</td>
                         <td>
                             <select name="class_type">
-                                <option>seats_fc</option>
-                                <option>seats_sc</option>
-                                <option>seats_tc</option>
+                                <option name="first" value="seats_fc">first</option>
+                                <option name="second" value="seats_sc">second</option>
+                                <option name="third" value="seats_tc">third</option>
                             </select>
                         </td>
                     </tr>

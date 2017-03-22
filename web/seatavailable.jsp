@@ -18,10 +18,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Seat Available</title>
+        <jsp:include page="commonheader.jsp"/>
+
     </head>
     <body>
-        <form id="form4" action="" method="post">
-            <table>
+        <form id="form4" action="realbooking" method="post">
+                <div>
+                    <table>
                 <tr>
                     Train No:
                 </tr>
@@ -31,9 +34,7 @@
                             //request.getSession().setAttribute("train_no",trno);
                             String trno=request.getSession().getAttribute("train_no").toString();
                             out.println(trno);
-
-                            //out.println(trno);
-                        %>
+                       %>
                 </tr>
                 <tr>
                     <td>
@@ -44,12 +45,8 @@
                 <tr>
                     <td>
                         <%
-                            // String datesel=request.getParameter("date_select");
-                            //request.getSession().setAttribute("date_select",datesel);
                             String datesel=request.getSession().getAttribute("date_select").toString();
                             out.println(datesel);
-
-                            //out.println(datesel);
                         %>
                         
                     </td>
@@ -63,10 +60,11 @@
                         %>
                     </td>
                 </tr>
-
-                        <tr>
+                <div>
+                <tr>
                             <td>No of seats in ${sessionScope.class_type} Class</td>
-                    <td>
+                </tr>
+                    <tr>
                         <% 
                             try
                             {
@@ -82,7 +80,7 @@
 
                                 if("seats_fc".equals(class_type.toString()))
                                 {
-                                    String query=" select seats_fc from capacity where train_no=? and date=? and stations=?" ;
+                                    String query=" select seats_fc from capacity where train_no=? and j_date=? and stations=?" ;
                                     PreparedStatement stmt=con.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                                     stmt.setInt(1,Integer.parseInt(trno));
                                     //stmt.setString(2,src);
@@ -92,9 +90,7 @@
                                     while(rs.next())
                                     {
                                     %>
-                                    <tr>
-                                        <td><%= rs.getInt("seats_fc")%></td>
-                                    </tr>
+                                        <td id="tr1"><%= rs.getInt("seats_fc")%></td>
                                     <%
                                     }
 
@@ -102,7 +98,7 @@
 
                                 if("seats_sc".equals(class_type.toString()))
                                 {
-                                    String query=" select seats_sc from capacity where train_no=? and date=? and stations=?" ;
+                                    String query=" select seats_sc from capacity where train_no=? and j_date=? and stations=?" ;
                                     PreparedStatement stmt=con.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                                     stmt.setInt(1,Integer.parseInt(trno));
                                     //stmt.setString(2,src);
@@ -112,16 +108,14 @@
                                     while(rs.next())
                                     {
                                     %>
-                                    <tr>
-                                        <td><%= rs.getInt("seats_sc")%></td>
-                                    </tr>
+                                    <td id="tr1"><%= rs.getInt("seats_sc")%></td>
                                     <%
                                     }
 
                                 }
                                 if("seats_tc".equals(class_type.toString()))
                                 {
-                                    String query=" select seats_tc from capacity where train_no=? and date=? and stations=?" ;
+                                    String query=" select seats_tc from capacity where train_no=? and j_date=? and stations=?" ;
                                     PreparedStatement stmt=con.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                                     stmt.setInt(1,Integer.parseInt(trno));
                                     //stmt.setString(2,src);
@@ -131,15 +125,13 @@
                                     while(rs.next())
                                     {
                                     %>
-                                    <tr>
-                                        <td><%= rs.getInt("seats_tc")%></td>
-                                    </tr>
+                                        <td id="tr1"><%= rs.getInt("seats_tc")%></td>
                                     <%
                                     }
 
                                 }
 
-                                String query=" select seats_fc,seats_sc,seats_tc from capacity where train_no=? and date=?" ;
+                                String query=" select seats_fc,seats_sc,seats_tc from capacity where train_no=? and j_date=?" ;
                                 PreparedStatement stmt=con.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                                 //stmt.setString(1,class_type);
                                 stmt.setInt(1,Integer.parseInt(trno));
@@ -164,10 +156,12 @@
                                 e.printStackTrace();
                             }
                     %>
-                    </td>
-
-                </tr>
+                    </tr>
             </table>
+            </div>
+                    <div>
+                        <input type="submit" name="book ticket" value="Book ticket">
+                    </div>
         </form>
     </body>
 </html>

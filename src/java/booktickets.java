@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,6 @@ public class booktickets extends HttpServlet
 
         String src_station = request.getParameter("src_station");
         String dest_station = request.getParameter("dest_station");
-
         session.setAttribute("src_station", src_station);
         session.setAttribute("dest_station", dest_station);
 
@@ -62,6 +62,7 @@ public class booktickets extends HttpServlet
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, src_station);
             stmt.setString(2, dest_station);
+            
             ResultSet rs = stmt.executeQuery();
             while (rs.next())
             {
@@ -69,7 +70,7 @@ public class booktickets extends HttpServlet
                 String name = rs.getString(2);
                 String arrival_time = rs.getString("arrival_time");
                 String dept_time = rs.getString("dept_time");
-
+//                String j_date=rs.getString("j_date").toString();
                 //out.println(name);
                 //out.println(train_no);
                 //out.println(arrival_time);
