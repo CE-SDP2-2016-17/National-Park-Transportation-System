@@ -71,11 +71,20 @@ public class realbooking extends HttpServlet
                 int src_km = rs.getInt(1);
                 int dest_km = rs.getInt(2);
                 int total_kms = dest_km - src_km;
-
+                int price = 0;
                 switch (class_type) {
                     case "seats_fc":
+                        price = total_kms * 3;
+                        break;
+                    case "seats_sc":
+                        price = total_kms * 2;
+                        break;
+                    case "seats_tc":
+                        price = total_kms * 1;
+                        break;
 
                 }
+                session.setAttribute("total_price", price);
 
             }
         }
