@@ -50,6 +50,7 @@ public class realbooking extends HttpServlet
         String class_type = request.getSession().getAttribute("class_type").toString();
         String user_id = request.getSession().getAttribute("user_id").toString();
 
+        String status = "c";
         String DB_Driver = getServletContext().getInitParameter("DB_Driver");
         String DB_Con = getServletContext().getInitParameter("DB_Con");
         String DB_Uname = getServletContext().getInitParameter("DB_Username");
@@ -97,18 +98,30 @@ public class realbooking extends HttpServlet
 
         try {
 //                out.println("hello");
+            String price = request.getSession().getAttribute("total_price").toString();
             Class.forName(DB_Driver);
             con = DriverManager.getConnection(DB_Con, DB_Uname, DB_Password);
             PreparedStatement pstm = null;
-            String query = "insert into booking(train_no,date,src_code,dest_code,class,status,passenger_id) values(?,?,?,?,?,'c',?)";
+            String query = "insert into booking(train_no,date,src_code,dest_code,class,status,passenger_id,price) values(?,?,?,?,?,?,?,?)";
             pstm = con.prepareStatement(query);
             pstm.setString(1, train_no);
             pstm.setString(2, datesel);
             pstm.setString(3, src_station);
             pstm.setString(4, dest_station);
             pstm.setString(5, class_type);
+            pstm.setString(6, status);
             pstm.setString(7, user_id);
+            pstm.setString(8, price);
+
+            int count = pstm.executeUpdate();
+
+            response.sendRedirect(request.getContextPath() + "/ticketbooked.jsp");
+
         }
+        catch (Exception e) {
+            out.println(e);
+        }
+
         finally {
             out.close();
         }

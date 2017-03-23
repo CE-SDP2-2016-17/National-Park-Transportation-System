@@ -25,7 +25,8 @@ public class signin extends HttpServlet
 {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -45,52 +46,45 @@ public class signin extends HttpServlet
         String DB_Uname = getServletContext().getInitParameter("DB_Username");
         String DB_Password = getServletContext().getInitParameter("DB_Password");
 
-        if (username.equals("mdx123") && password.equals("mdx123"))
-        {
+        if (username.equals("mdx123") && password.equals("mdx123")) {
             HttpSession session = request.getSession();
             session.setAttribute("Admin", username);
             response.sendRedirect(request.getContextPath() + "/adminhome.jsp");
             out.close();
         }
-        else
-        {
+        else {
             Connection con;
-            try
-            {
+            try {
                 Class.forName(DB_Driver);
                 con = DriverManager.getConnection(DB_Con, DB_Uname, DB_Password);
                 PreparedStatement ps = con.prepareStatement("select * from customer where username=? and password=? ");
                 ps.setString(1, username);
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next())
-                {
+                if (rs.next()) {
                     HttpSession session = request.getSession();
                     int userid = rs.getInt("Id");
+                    String email = rs.getString("email");
                     session.setAttribute("username", username);
                     session.setAttribute("user_id", userid);
+                    session.setAttribute("email", email);
                     response.sendRedirect(request.getContextPath() + "/userhome.jsp");
                 }
-                else
-                {
+                else {
                     response.sendRedirect(request.getContextPath() + "/signin.jsp");
                 }
             }
-            catch (ClassNotFoundException e)
-            {
+            catch (ClassNotFoundException e) {
                 out.println(e);
 
             }
-            catch (SQLException e)
-            {
+            catch (SQLException e) {
                 out.println(e);
             }
-            catch (IOException e)
-            {
+            catch (IOException e) {
                 out.println(e);
             }
-            finally
-            {
+            finally {
                 out.close();
             }
         }

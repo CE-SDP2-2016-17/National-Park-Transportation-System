@@ -13,5 +13,9 @@
     </head>
     <body>
         <h1>Your ticket has been booked</h1>
+        <form action="realbooking" method="post">
+            <input type="submit" value="logout">
+            
+        </form>
     </body>
 </html>
