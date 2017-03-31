@@ -27,14 +27,6 @@ public class Avail_Trains
         this.dept_time = dept_time;
     }
 
-    public Avail_Trains(int train_no, String name, String arrival_time, String dept_time, Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Avail_Trains(int train_no, String name, String arrival_time, String dept_time, String j_date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public String getName()
     {
         return name;

@@ -40,6 +40,7 @@ public class logout extends HttpServlet
             session.invalidate();
 
             out.print("You are successfully logged out!");
+            response.sendRedirect("signin.jsp");
 
             out.close();
 

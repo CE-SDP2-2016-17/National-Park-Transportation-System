@@ -19,7 +19,8 @@ import javax.servlet.http.HttpSession;
  * @author sagar
  */
 @WebServlet(urlPatterns = {"/available1"})
-public class available1 extends HttpServlet {
+public class available1 extends HttpServlet
+{
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,26 +32,29 @@ public class available1 extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            
-            HttpSession session=request.getSession();
-           // String train_no=null;
+
+            HttpSession session = request.getSession();
+            // String train_no=null;
             //train_no=(String) session.getAttribute(train_no);
-            String train_no=(String)request.getParameter("train_no");
-            session.setAttribute("train_no",train_no);
-            String date_select=(String)request.getParameter("date_select");
-            session.setAttribute("date_select",date_select);
+            String train_no = (String) request.getParameter("train_no");
+            session.setAttribute("train_no", train_no);
+            String date_select = (String) request.getParameter("date_select");
+            session.setAttribute("date_select", date_select);
             //response.sendRedirect("/train_reservation/seatavailable.jsp");
-            String class_type=(String)request.getParameter("class_type");
-            session.setAttribute("class_type",class_type);
+            String class_type = (String) request.getParameter("class_type");
+            session.setAttribute("class_type", class_type);
 
-            RequestDispatcher view=request.getRequestDispatcher("seatavailable.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("seatavailable.jsp");
             view.forward(request, response);
+            //response.sendRedirect(request.getContextPath() + "/seatavailable.jsp");
 
-        } finally {
+        }
+        finally {
             out.close();
         }
     }
@@ -66,7 +70,8 @@ public class available1 extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         processRequest(request, response);
     }
 
@@ -80,7 +85,8 @@ public class available1 extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         processRequest(request, response);
     }
 
@@ -90,7 +96,8 @@ public class available1 extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo()
+    {
         return "Short description";
     }// </editor-fold>
 

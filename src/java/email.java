@@ -9,13 +9,6 @@ import java.io.PrintWriter;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -24,6 +17,11 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -46,26 +44,49 @@ public class email extends HttpServlet
             throws ServletException, IOException, AddressException, MessagingException
     {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        String to = request.getSession().getAttribute("email").toString();
-        String from = "sagar.12101@yahoo.com";
-        String host = "localhost";
-        Properties prop = System.getProperties();
-        Session session1 = Session.getDefaultInstance(prop);
-        prop.setProperty("mail.smtp.host", host);
-
         try (PrintWriter out = response.getWriter()) {
-            MimeMessage message = new MimeMessage(session1);
-            message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("Booking confirmation");
-            message.setText("You have successfully booked tour tickets");
-            Transport.send(message);
-            out.println("Sent message successfully....");
+            String from = "trainreservationssm@gmail.com";
+            String password = "sagarsmit";
+            String to = request.getParameter("email_add");
 
-        }
-        catch (MessagingException mex) {
-            mex.printStackTrace();
+            String train_no = request.getParameter("train_no");
+            String datesel = request.getParameter("datesel");
+            String src_station = request.getParameter("src_station");
+            String dest_station = request.getParameter("dest_station");
+            String class_type = request.getParameter("class_type");
+            String username = request.getParameter("username");
+
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
+
+            Session session = Session.getInstance(props,
+                    new javax.mail.Authenticator()
+            {
+                protected PasswordAuthentication getPasswordAuthentication()
+                {
+                    return new PasswordAuthentication(from, password);
+                }
+            });
+
+            try {
+
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(from));
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(to));
+                message.setSubject("Ticket Confirmation");
+                message.setText("Hello " + username + ".  Your trip is booked!   Your journey is on  " + datesel + " from " + src_station + " to " + dest_station + ".   Your class category is " + class_type + " for train no " + train_no + ".  Have a happy journey.");
+                Transport.send(message);
+
+                out.println("Done");
+                response.sendRedirect(request.getContextPath() + "/email_sent.jsp");
+            }
+            catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

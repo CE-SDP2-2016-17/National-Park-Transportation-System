@@ -1,6 +1,6 @@
 <%-- 
-    Document   : realbooking
-    Created on : Mar 21, 2017, 11:10:45 PM
+    Document   : email_sent
+    Created on : Mar 23, 2017, 10:40:38 PM
     Author     : sagar
 --%>
 
@@ -12,9 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Your ticket has been booked</h1>
-        <form action="realbooking" method="post">
-            <input type="submit" value="logout">
+        <h1>Email sent successfully.</h1>
+        <form action="signin.jsp" method="post">
+            <input type="submit" name="logout" value="logout">
             
         </form>
     </body>

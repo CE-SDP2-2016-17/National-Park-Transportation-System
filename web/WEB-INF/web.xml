@@ -21,6 +21,10 @@
         <servlet-class>addroute</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>avail_trans</servlet-name>
+        <servlet-class>avail_trans</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>dummy</servlet-name>
         <servlet-class>dummy</servlet-class>
     </servlet>
@@ -69,6 +73,10 @@
     <servlet-mapping>
         <servlet-name>seatavailable</servlet-name>
         <url-pattern>/seatavailable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>avail_trans</servlet-name>
+        <url-pattern>/avail_trans</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>signin</servlet-name>
