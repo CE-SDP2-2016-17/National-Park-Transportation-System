@@ -10,20 +10,31 @@
 <jsp:include page="style.jsp"/>
 <html>
     <head>
-        <jsp:include page="commonheader.jsp"/>
+         <style>
+  #foo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
+</style>
+    <script type="text/javascript"> //<![CDATA[ 
+var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
+document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+//]]>
+</script>
     </head>
     <body>
         <div id="d">
             <h1 style="color:red;margin-left:33%" > Sign In</h1>
-            <form id="form1" action="signin" method="post">
+            <form id="form1" action="j_security_check" method="post">
                 <table>
                 <tr>
                     <td>Username: </td>
-                    <td><input type="text" name="username" placeholder="Username" required/></td>
+                    <td><input type="text" name="j_username" placeholder="Username" required/></td>
                 </tr>
                 <tr>
                     <td>Password: </td>
-                    <td><input type="password" name="password" placeholder="Password" required/></td>
+                    <td><input type="password" name="j_password" placeholder="Password" required/></td>
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
@@ -32,5 +43,10 @@
             </table>
             </form>
         </div>
+        <div id="foo">
+    <script language="JavaScript" type="text/javascript">
+TrustLogo("https://trainres.southcentralus.cloudapp.azure.com/comodo_secure_seal_100x85_transp.png", "CL1", "none");
+</script>
+<a  href="https://www.positivessl.com/" id="comodoTL">Positive SSL</a></div>
     </body>
 </html>

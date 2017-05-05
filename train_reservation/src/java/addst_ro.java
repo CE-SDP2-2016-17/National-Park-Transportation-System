@@ -6,93 +6,113 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.*;
 
 /**
  *
- * @author dell pc
+ * @author Smit
  */
-public class signup extends HttpServlet
-{
+@WebServlet(urlPatterns = {"/addst_ro"})
+public class addst_ro extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.security.NoSuchAlgorithmException
-     * @throws java.lang.CloneNotSupportedException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException    {
-        response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException {
+      response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        /*
+         HttpSession session = request.getSession(false);
+         if (session == null)
+         {
+         RequestDispatcher rd = request.getRequestDispatcher("adminhome.jsp");
+         rd.forward(request, response);
+         }
+         else
+         {
+
+         }
+         */
         String DB_Driver = getServletContext().getInitParameter("DB_Driver");
         String DB_Con = getServletContext().getInitParameter("DB_Con");
         String DB_Uname = getServletContext().getInitParameter("DB_Username");
         String DB_Password = getServletContext().getInitParameter("DB_Password");
-        String Name = request.getParameter("Name");
-        String Email = request.getParameter("Email");
-        String Username = request.getParameter("Username");
-        String Password = request.getParameter("Password1");
-        byte[] b = Password.getBytes();
-
-try {
-      MessageDigest digest = MessageDigest.getInstance("MD5");
-		
-		//Update input string in message digest
-		digest.update(b);
-
-
-Password = new BigInteger(1, digest.digest()).toString(16);
-
-}
-catch (NoSuchAlgorithmException e) {
-
-			e.printStackTrace();
-		}
-
- 
-
+        String pos = request.getParameter("pos");
+        String ro_id = request.getParameter("ro_id");
+        String st_name = request.getParameter("st_name");
+int p,r;
         Connection con = null;
         try
         {
-
             Class.forName(DB_Driver);
             con = DriverManager.getConnection(DB_Con, DB_Uname, DB_Password);
-            PreparedStatement pstm;
+            //ResultSet rs;
             //The query can be update query or can be select query
-            String query = "insert into customer(Name,Email,Username,Password) values(?,?,?,?)";
-            pstm = con.prepareStatement(query);
-            pstm.setString(1, Name);
-            pstm.setString(2, Email);
-            pstm.setString(3, Username);
-            pstm.setString(4, Password);
+            /*
+             String query1 = "select * from station where Name = ?";
+             pstm = con.prepareStatement(query1);
 
-            int count = pstm.executeUpdate();
-             String query1 = "insert into user_roles(Username,role_name) values(?,?)";
-            pstm = con.prepareStatement(query1);
-            pstm.setString(1, Username);
-            pstm.setString(2, "user");
-            pstm.executeUpdate();
-           response.sendRedirect(request.getContextPath() + "/signin");
+             pstm.setString(1, Name);
+             rs = pstm.executeQuery();
+             if (rs.next())
+             {
+             boolean b = true;
+
+             session.setAttribute("notavailable", b);
+             response.sendRedirect("/addstation");
+             }*/
+            
+            
+            r=Integer.parseInt(ro_id);
+            p=Integer.parseInt(pos);
+            String query = "select * from ro_st where route_id = ? order by pos";
+           PreparedStatement stmt=con.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+          stmt.setInt(1,r);
+            ResultSet rs=stmt.executeQuery();
+            int i=1;
+                    while(rs.next())
+                    {
+                            if(i>=p)
+                            {
+                            rs.updateInt("pos",i+1);
+                            rs.updateRow();
+                            }
+                                
+                                i++;
+                    }
+               String query1 ="insert into ro_st(route_id,st_name,pos) values(?,?,?)";
+               
+                stmt=con.prepareStatement(query1);
+             stmt.setInt(1,r);
+                          stmt.setString(2,st_name);
+             stmt.setInt(3,p);
+
+             
+            stmt.executeUpdate();
+            response.sendRedirect("/train_reservation/adminhome.jsp");
         }
         catch (ClassNotFoundException ex)
         {
             out.println(ex);
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex)
+        {
             out.println(ex);
         }
         finally
@@ -104,7 +124,7 @@ catch (NoSuchAlgorithmException e) {
                     con.close();
                 }
             }
-            catch (SQLException ex)
+            catch (Exception ex)
             {
                 out.println(ex);
             }
@@ -123,8 +143,7 @@ catch (NoSuchAlgorithmException e) {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -138,8 +157,7 @@ catch (NoSuchAlgorithmException e) {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -149,8 +167,7 @@ catch (NoSuchAlgorithmException e) {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo()
-    {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

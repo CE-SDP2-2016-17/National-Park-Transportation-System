@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +36,7 @@ public
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/trainreservation", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/trainreservation", "root", "root");
             PreparedStatement preparedStatement;
             //The query can be update query or can be select query
             String query = "select id,Name from station";
@@ -49,9 +50,9 @@ public
             }
 
         }
-        catch (Exception e)
+        catch (ClassNotFoundException | SQLException e)
         {
-
+            System.out.println(e);
         }
         finally
         {
@@ -62,8 +63,9 @@ public
                     con.close();
                 }
             }
-            catch (Exception ex)
+            catch (SQLException ex)
             {
+                System.out.println(ex);
             }
         }
 

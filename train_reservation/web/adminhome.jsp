@@ -10,6 +10,7 @@
 <html>
     <head>
         <jsp:include page="commonheader.jsp"/>
+        
     </head>
     <body>
         <div id="d">
@@ -18,6 +19,10 @@
                     <tr><a href="addstation.jsp">Add New Station</a></tr><br/><br/>
                     <tr><a href="addroute.jsp">Add New Route</a></tr><br/><br/>
                     <tr><a href="select_route.jsp">Add New Train</a></tr><br/><br/>
+                                                <tr><a href="addst_ro.jsp">Add station to route</a></tr><br/><br/>
+
+                                        <tr><a href="addadmin.jsp">Add new admin</a></tr><br/><br/>
+
                 </table>
             </div>
     </body>

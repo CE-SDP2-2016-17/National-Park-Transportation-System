@@ -22,6 +22,18 @@
     <link href="css/font-awesome-ie7.css" rel="stylesheet">
     <!-- Bootbusiness theme -->
     <link href="css/boot-business.css" rel="stylesheet">
+     <style>
+  #foo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
+</style>
+    <script type="text/javascript"> //<![CDATA[ 
+var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
+document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+//]]>
+</script>
   </head>
   <body>
     <!-- Start: HEADER -->
@@ -42,8 +54,8 @@
               <ul class="nav pull-right">
                 <li><a href="about.jsp">About us</a></li>
                 <li><a href="contact_us.html">Contact us</a></li>
-                <li><a href="signup.jsp">Sign up</a></li>
-                <li><a href="signin.jsp">Sign in</a></li>
+                <li><a href="signin">SignIn</a></li>
+                <li><a href="signup.jsp">SignUp</a></li>
               </ul>
             </div>
           </div>
@@ -135,5 +147,10 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/boot-business.js"></script>
+    <div id="foo">
+    <script language="JavaScript" type="text/javascript">
+TrustLogo("https://nationalpark.southcentralus.cloudapp.azure.com/comodo_secure_seal_100x85_transp.png", "CL1", "none");
+</script>
+<a  href="https://www.positivessl.com/" id="comodoTL">Positive SSL</a>  </div>
   </body>
 </html>

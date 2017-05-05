@@ -57,7 +57,7 @@
                 </tr>
                 <tr>
                     <td>Seats in Third class:</td>
-                    <td><input type="text" name="seats_tc" style="width:130px"/></td>
+                    <td><input type="text" name="seats_gc" style="width:130px"/></td>
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>

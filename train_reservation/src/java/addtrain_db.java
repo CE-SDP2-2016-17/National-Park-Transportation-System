@@ -66,7 +66,7 @@ public class addtrain_db extends HttpServlet
         }
         int seats_fc = Integer.parseInt(request.getParameter("seats_fc"));
         int seats_sc = Integer.parseInt(request.getParameter("seats_sc"));
-        int seats_tc = Integer.parseInt(request.getParameter("seats_tc"));
+        int seats_gc = Integer.parseInt(request.getParameter("seats_gc"));
 
         Connection connection = null;
         ResultSet resultSet;
@@ -101,13 +101,13 @@ public class addtrain_db extends HttpServlet
                 kilometers.add(resultSet.getInt("kilometers"));
             }
 
-            String query1 = "insert into trains(train_no,name,seats_fc,seats_sc,seats_tc) values(?,?,?,?,?)";
+            String query1 = "insert into trains(train_no,name,seats_fc,seats_sc,seats_gc) values(?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(query1);
             preparedStatement.setInt(1, train_no);
             preparedStatement.setString(2, train_name);
             preparedStatement.setInt(3, seats_fc);
             preparedStatement.setInt(4, seats_sc);
-            preparedStatement.setInt(5, seats_tc);
+            preparedStatement.setInt(5, seats_gc);
 
             int count = preparedStatement.executeUpdate();
 

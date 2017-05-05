@@ -10,8 +10,13 @@
 <jsp:include page="style.jsp"/>
 <html>
     <head>
+         <link rel="stylesheet" type="text/css" href="css/datepicker.css">
+        <link rel="stylesheet" href="bootstrap.css">
         <jsp:include page="commonheader.jsp"/>
+            <script type='text/javascript' src='js/datepicker.js'></script>
+
     </head>
+    
     <body>
         <div id="d">
             <h1 style="color:red;margin-left:20%" > Welcome ${sessionScope.username}</h1>
@@ -44,6 +49,10 @@
                                 </select>
                             </jsp:useBean>
                         </td>
+                    </tr>
+                     <tr>
+                        <td>Date of Journey </td>
+                        <td><input name="date_select" id="selectdate" class='datepicker' size='11' title=''  /></td> 
                     </tr>
                     <tr><td><br></td></tr>
                     <tr>

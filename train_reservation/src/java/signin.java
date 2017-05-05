@@ -37,44 +37,37 @@ public class signin extends HttpServlet
     {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+String username = request.getRemoteUser();
+       
         String DB_Driver = getServletContext().getInitParameter("DB_Driver");
         String DB_Con = getServletContext().getInitParameter("DB_Con");
         String DB_Uname = getServletContext().getInitParameter("DB_Username");
         String DB_Password = getServletContext().getInitParameter("DB_Password");
-
-        if (username.equals("mdx123") && password.equals("mdx123"))
-        {
-            HttpSession session = request.getSession();
-            session.setAttribute("Admin", username);
-            response.sendRedirect(request.getContextPath() + "/adminhome.jsp");
-            out.close();
-        }
-        else
-        {
-            Connection con;
+String role_name=null;
+      Connection con;
             try
             {
                 Class.forName(DB_Driver);
                 con = DriverManager.getConnection(DB_Con, DB_Uname, DB_Password);
-                PreparedStatement ps = con.prepareStatement("select * from customer where username=? and password=? ");
+                PreparedStatement ps = con.prepareStatement("select role_name,Email from user_roles,customer where user_roles.Username=customer.Username and user_roles.Username=?");
                 ps.setString(1, username);
-                ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next())
                 {
                     HttpSession session = request.getSession();
-                    int userid = rs.getInt("Id");
                     session.setAttribute("username", username);
-                    session.setAttribute("user_id", userid);
+                    role_name= rs.getString(1);
+                     String email_add= rs.getString(2);
+                                         session.setAttribute("email_add",email_add);
+
+                   
+
+                }
+                 if(role_name.equals("user"))
                     response.sendRedirect(request.getContextPath() + "/userhome.jsp");
-                }
-                else
-                {
-                    response.sendRedirect(request.getContextPath() + "/signin.jsp");
-                }
+                    else
+                         response.sendRedirect(request.getContextPath() + "/adminhome.jsp");
+               
             }
             catch (ClassNotFoundException e)
             {
@@ -93,7 +86,9 @@ public class signin extends HttpServlet
             {
                 out.close();
             }
-        }
+
+        
+       
 
     }
 

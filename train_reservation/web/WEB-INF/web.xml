@@ -42,19 +42,61 @@
     </servlet>
     <servlet>
         <servlet-name>available</servlet-name>
-        <servlet-class>available</servlet-class>
+        <servlet-class>available1</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>booktickets</servlet-name>
         <servlet-class>booktickets</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>seatavailable</servlet-name>
+        <servlet-class>seatavailable</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>available_db</servlet-name>
         <servlet-class>available_db</servlet-class>
     </servlet>
+    <servlet-name>realbooking</servlet-name>
+    <servlet-class>realbooking</servlet-class>
+    <servlet>
+        <servlet-name>addadmin</servlet-name>
+        <servlet-class>addadmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>email</servlet-name>
+        <servlet-class>email</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>logout</servlet-class>
+    </servlet>
+     <servlet>
+        <servlet-name>select_pnr</servlet-name>
+        <servlet-class>select_pnr</servlet-class>
+    </servlet>
+     <servlet>
+        <servlet-name>canceltickets</servlet-name>
+        <servlet-class>canceltickets</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>canceltickets</servlet-name>
+        <url-pattern>/canceltickets</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>select_pnr</servlet-name>
+        <url-pattern>/select_pnr</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>realbooking</servlet-name>
+        <url-pattern>/realbooking</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>seatavailable</servlet-name>
+        <url-pattern>/seatavailable</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>signin</servlet-name>
@@ -104,6 +146,18 @@
         <servlet-name>available_db</servlet-name>
         <url-pattern>/available_db</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addadmin</servlet-name>
+        <url-pattern>/addadmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>email</servlet-name>
+        <url-pattern>/email</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -123,6 +177,38 @@
     </context-param>
     <context-param>
         <param-name>DB_Password</param-name>
-        <param-value/>
+        <param-value>root</param-value>
     </context-param>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/signin.jsp</form-login-page>
+            <form-error-page>/signup.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Web Demo</web-resource-name>
+            <url-pattern>/adminhome.jsp</url-pattern>
+            <url-pattern>/addroute.jsp</url-pattern>
+            <url-pattern>/addstation.jsp</url-pattern>
+            <url-pattern>/addtrain.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Web User</web-resource-name>
+            <url-pattern>/booktickets.jsp</url-pattern>
+            <url-pattern>/userhome.jsp</url-pattern>
+            <url-pattern>/signin</url-pattern>
+            <url-pattern>/realbooking.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
 </web-app>

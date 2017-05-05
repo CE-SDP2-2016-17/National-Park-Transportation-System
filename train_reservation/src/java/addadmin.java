@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dell pc
  */
-public class signup extends HttpServlet
+public class addadmin extends HttpServlet
 {
 
     /**
@@ -82,12 +82,13 @@ catch (NoSuchAlgorithmException e) {
             pstm.setString(4, Password);
 
             int count = pstm.executeUpdate();
-             String query1 = "insert into user_roles(Username,role_name) values(?,?)";
+              String query1 = "insert into user_roles(Username,role_name) values(?,?)";
             pstm = con.prepareStatement(query1);
             pstm.setString(1, Username);
-            pstm.setString(2, "user");
+            pstm.setString(2, "admin");
             pstm.executeUpdate();
-           response.sendRedirect(request.getContextPath() + "/signin");
+            
+           response.sendRedirect(request.getContextPath() + "/adminhome.jsp");
         }
         catch (ClassNotFoundException ex)
         {
